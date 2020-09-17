@@ -1,19 +1,17 @@
 #!/bin/bash
 
-### cd locally
-cd $(dirname $0)
-
 ### Load config
-export OCM_CONTAINER_CONFIG="./env.source"
+export OCM_ENV_CONFIG="${HOME}/.config/ocm-env/env.source"
 
 export CONTAINER_SUBSYS="sudo docker"
 
-if [ ! -f ${OCM_CONTAINER_CONFIG} ]; then
+if [ ! -f ${OCM_ENV_CONFIG} ]; then
     echo "Cannot find config file, exiting";
+    echo "Use init.sh to create one."
     exit 1;
 fi
 
-source ${OCM_CONTAINER_CONFIG}
+source ${OCM_ENV_CONFIG}
 
 ### Select osv4client version, auto-detect from mirror.openshift.com
 if [ "x${osv4client}" == "x" ]; then
@@ -40,7 +38,7 @@ date -u
 
 time ${CONTAINER_SUBSYS}  build --no-cache \
   --build-arg osv4client=${osv4client} \
-  -t ocm-container .
+  -t ocm-env .
 
 # for time tracking
 date

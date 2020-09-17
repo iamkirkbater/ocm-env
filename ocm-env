@@ -1,0 +1,24 @@
+#!/bin/bash
+
+### Load config
+export OCM_ENV_CONFIG="${HOME}/.config/ocm-env/env.source"
+
+export CONTAINER_SUBSYS="sudo docker"
+
+if [ ! -f ${OCM_ENV_CONFIG} ]; then
+    echo "Cannot find config file, exiting";
+    exit 1;
+fi
+
+source ${OCM_ENV_CONFIG}
+
+### start container
+${CONTAINER_SUBSYS} run -it --rm --privileged \
+-e CLI \
+-e OCM_URL \
+-e "SSH_AUTH_SOCK=/tmp/ssh.sock" \
+-v ${SSH_AUTH_SOCK}:/tmp/ssh.sock \
+-v ${HOME}/.config/ocm-env:/root/.config \
+-v ${HOME}/.ssh:/root/.ssh \
+-v ${HOME}/.aws/credentials:/root/.aws/credentials \
+ocm-env /bin/bash

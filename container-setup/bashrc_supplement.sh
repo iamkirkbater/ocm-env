@@ -1,12 +1,7 @@
 #!/bin/bash
 
-export EDITOR=vim
-
 source /usr/local/kube_ps1/kube-ps1.sh
-export PS1='[\u@\h \W $(ocm_environment) $(kube_ps1)]\$ '
-export KUBE_PS1_BINARY=oc
-export KUBE_PS1_CLUSTER_FUNCTION=cluster_function
-export KUBE_PS1_SYMBOL_ENABLE=false
+source ${HOME}/.config/env.source
 complete -C '/usr/local/aws/aws/dist/aws_completer' aws
 
 function cluster_function() {
@@ -16,5 +11,5 @@ function cluster_function() {
 function ocm_environment() {
 	# based on how ocm-cli works for now, when the default change we will go with it
 	export ENV_OCM_URL=${OCM_URL:-production}
-	echo "{$(tput setaf 2)${ENV_OCM_URL}$(tput sgr0)}"
+	echo "{$(tput setaf 2) ${ENV_OCM_URL}$(tput sgr0)}"
 }
