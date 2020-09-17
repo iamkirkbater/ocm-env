@@ -38,8 +38,3 @@ export awsclient=awscli-exe-linux-x86_64.zip
 
 export osdctlversion=v0.1.0
 ./install-osdctl.sh $1
-
-# Activate all environment variables from env.source
-echo 'source /root/env.source' >> ~/.bashrc
-
-echo 'source /container-setup/bashrc_supplement.sh' >> ~/.bashrc
