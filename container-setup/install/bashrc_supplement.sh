@@ -13,3 +13,6 @@ function ocm_environment() {
 	export ENV_OCM_URL=${OCM_URL:-production}
 	echo "{$(tput setaf 2) ${ENV_OCM_URL}$(tput sgr0)}"
 }
+
+# Login on entry
+ocm-login
