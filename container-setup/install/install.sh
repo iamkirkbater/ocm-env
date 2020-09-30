@@ -7,22 +7,6 @@ fi
 
 echo "in container";
 
-yum -y install \
-    bash-completion \
-    findutils \
-    fzf \
-    git \
-    golang \
-    jq \
-    make \
-    procps-ng \
-    rsync \
-    sshuttle \
-    vim-enhanced \
-    wget;
-
-yum clean all;
-
 export moactlversion=v0.0.5
 ./install-moactl.sh $1
 
@@ -38,3 +22,7 @@ export awsclient=awscli-exe-linux-x86_64.zip
 
 export osdctlversion=v0.1.0
 ./install-osdctl.sh $1
+
+./install-bashconfig.sh $1
+
+./install-utils.sh $1
